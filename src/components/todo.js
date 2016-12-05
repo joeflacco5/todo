@@ -1,6 +1,28 @@
 import React, {Component} from 'react';
 import moment from 'moment';
 
+class Time extends Component {
+  constructor(props){
+    super(props);
+    this.state={date: moment().format()}
+  }
+  componentDidMount(){
+    setInterval(() => this.tick(), 1000)
+  }
+  tick() {
+    this.setState({
+      date: moment().format()
+    })
+  }
+  render() {
+    const date = this.state.date
+    return ( <div className="time">
+      <h4>{date}</h4>
+      </div>
+    )
+  }
+}
+
 class TodoItems extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +38,6 @@ class TodoItems extends Component {
     <ul className="theList">
       {listItems}
     </ul>
-
 
   );
   }
@@ -52,6 +73,7 @@ class Todo extends Component{
       </form>
     </div>
     <TodoItems entries={this.state.items}/>
+    <Time />
   </div>
 );
   }
@@ -59,3 +81,16 @@ class Todo extends Component{
 
 
 export default Todo;
+
+
+
+
+
+
+class TodoX extends Component{
+  constructor(props){
+    super(props);
+    this.state={items: []}
+
+  }
+}

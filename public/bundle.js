@@ -25092,8 +25092,55 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var TodoItems = function (_Component) {
-  _inherits(TodoItems, _Component);
+var Time = function (_Component) {
+  _inherits(Time, _Component);
+
+  function Time(props) {
+    _classCallCheck(this, Time);
+
+    var _this = _possibleConstructorReturn(this, (Time.__proto__ || Object.getPrototypeOf(Time)).call(this, props));
+
+    _this.state = { date: (0, _moment2.default)().format() };
+    return _this;
+  }
+
+  _createClass(Time, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      setInterval(function () {
+        return _this2.tick();
+      }, 1000);
+    }
+  }, {
+    key: 'tick',
+    value: function tick() {
+      this.setState({
+        date: (0, _moment2.default)().format()
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var date = this.state.date;
+      return _react2.default.createElement(
+        'div',
+        { className: 'time' },
+        _react2.default.createElement(
+          'h4',
+          null,
+          date
+        )
+      );
+    }
+  }]);
+
+  return Time;
+}(_react.Component);
+
+var TodoItems = function (_Component2) {
+  _inherits(TodoItems, _Component2);
 
   function TodoItems(props) {
     _classCallCheck(this, TodoItems);
@@ -25127,17 +25174,17 @@ var TodoItems = function (_Component) {
 
 ;
 
-var Todo = function (_Component2) {
-  _inherits(Todo, _Component2);
+var Todo = function (_Component3) {
+  _inherits(Todo, _Component3);
 
   function Todo(props) {
     _classCallCheck(this, Todo);
 
-    var _this2 = _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).call(this, props));
+    var _this4 = _possibleConstructorReturn(this, (Todo.__proto__ || Object.getPrototypeOf(Todo)).call(this, props));
 
-    _this2.state = { items: [] };
-    _this2.addItem = _this2.addItem.bind(_this2);
-    return _this2;
+    _this4.state = { items: [] };
+    _this4.addItem = _this4.addItem.bind(_this4);
+    return _this4;
   }
 
   _createClass(Todo, [{
@@ -25158,7 +25205,7 @@ var Todo = function (_Component2) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this5 = this;
 
       return _react2.default.createElement(
         'div',
@@ -25175,7 +25222,7 @@ var Todo = function (_Component2) {
             'form',
             { onSubmit: this.addItem },
             _react2.default.createElement('input', { ref: function ref(a) {
-                return _this3._inputElement = a;
+                return _this5._inputElement = a;
               }, placeholder: 'Enter task...' }),
             _react2.default.createElement(
               'button',
@@ -25184,7 +25231,8 @@ var Todo = function (_Component2) {
             )
           )
         ),
-        _react2.default.createElement(TodoItems, { entries: this.state.items })
+        _react2.default.createElement(TodoItems, { entries: this.state.items }),
+        _react2.default.createElement(Time, null)
       );
     }
   }]);
@@ -25195,5 +25243,21 @@ var Todo = function (_Component2) {
 ;
 
 exports.default = Todo;
+
+var TodoX = function (_Component4) {
+  _inherits(TodoX, _Component4);
+
+  function TodoX(props) {
+    _classCallCheck(this, TodoX);
+
+    var _this6 = _possibleConstructorReturn(this, (TodoX.__proto__ || Object.getPrototypeOf(TodoX)).call(this, props));
+
+    _this6.state = { items: [] };
+
+    return _this6;
+  }
+
+  return TodoX;
+}(_react.Component);
 
 },{"moment":24,"react":179}]},{},[180]);
