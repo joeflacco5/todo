@@ -25068,7 +25068,7 @@ var Time = function (_Component) {
 exports.default = Time;
 
 },{"moment":24,"react":179}],184:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -25076,9 +25076,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25098,21 +25102,21 @@ var TodoItems = function (_Component) {
   }
 
   _createClass(TodoItems, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       var todoEntries = this.props.entries;
 
       function createTasks(item) {
         return _react2.default.createElement(
-          "li",
+          'li',
           { key: item.key },
           item.text
         );
       }
       var listItems = todoEntries.map(createTasks);
       return _react2.default.createElement(
-        "ul",
-        { className: "theList" },
+        'ul',
+        { className: 'theList' },
         listItems
       );
     }
@@ -25137,12 +25141,12 @@ var Todo = function (_Component2) {
   }
 
   _createClass(Todo, [{
-    key: "addItem",
+    key: 'addItem',
     value: function addItem(e) {
       var itemArray = this.state.items;
       itemArray.push({
         text: this._inputElement.value,
-        key: moment().format()
+        key: (0, _moment2.default)().format()
         // must be unique for React to identify!
       });
       this.setState({
@@ -25152,31 +25156,31 @@ var Todo = function (_Component2) {
       e.preventDefault(); // prevents default onSubmit event
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var _this3 = this;
 
       return _react2.default.createElement(
-        "div",
-        { className: "todoListMain" },
+        'div',
+        { className: 'todoListMain' },
         _react2.default.createElement(
-          "h2",
+          'h2',
           null,
-          "My Todo List!"
+          'My Todo List!'
         ),
         _react2.default.createElement(
-          "div",
-          { className: "header" },
+          'div',
+          { className: 'header' },
           _react2.default.createElement(
-            "form",
+            'form',
             { onSubmit: this.addItem },
-            _react2.default.createElement("input", { ref: function ref(a) {
+            _react2.default.createElement('input', { ref: function ref(a) {
                 return _this3._inputElement = a;
-              }, placeholder: "Enter task..." }),
+              }, placeholder: 'Enter task...' }),
             _react2.default.createElement(
-              "button",
-              { type: "submit" },
-              "Add"
+              'button',
+              { type: 'submit' },
+              'Add'
             )
           )
         ),
@@ -25192,4 +25196,4 @@ var Todo = function (_Component2) {
 
 exports.default = Todo;
 
-},{"react":179}]},{},[180]);
+},{"moment":24,"react":179}]},{},[180]);
