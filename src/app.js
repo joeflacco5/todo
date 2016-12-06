@@ -4,7 +4,7 @@ import ReactCountdownClock from 'react-countdown-clock';
 import Insert from './components/insert';
 import Ravens from './components/ravens';
 import Time from './components/time';
-import Todo from './components/todo';
+import {Todo, TodoX} from './components/todo';
 
 class App extends Component{
   constructor(props){
@@ -22,4 +22,4 @@ class App extends Component{
 
 
 
-ReactDOM.render(<Todo />, document.getElementById('root'));
+ReactDOM.render(<TodoX />, document.getElementById('root'));

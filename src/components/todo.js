@@ -43,7 +43,7 @@ class TodoItems extends Component {
   }
 };
 
-class Todo extends Component{
+export class Todo extends Component{
   constructor(props){
     super(props);
     this.state={items: []};
@@ -80,17 +80,58 @@ class Todo extends Component{
 };
 
 
-export default Todo;
 
 
 
 
 
 
-class TodoX extends Component{
+
+export class TodoX extends Component{
   constructor(props){
     super(props);
     this.state={items: []}
-
+    this.addItem = this.addItem.bind(this);
+  }
+  addItem(e) {
+    var newItems = this.state.items;
+    newItems.push({
+      text: this.inputElement.value,
+      key: moment().format()
+    })
+    this.setState({
+      items: newItems
+    })
+    e.preventDefault();
+    this.inputElement.value = " "
+  }
+    render() {
+      return(<div className="mainList">
+    <form onSubmit={this.addItem}>
+      <input ref={(a) => this.inputElement = a} placeholder="Enter new ToDo item!"/>
+      <button type="submit">Add Item</button>
+    </form>
+    <ShowList entries={this.state.items}/>
+    <Time />
+    </div>
+  );
   }
 }
+// viewing component
+class ShowList extends Component{
+  constructor(props){
+    super(props);
+  }
+  render() {
+  var Entries = this.props.entries;
+  function singleList(item) {
+    return <li key={item.key}>{item.text}</li>
+  }
+  var fullList = Entries.map(singleList)
+  return (
+    <ul>{fullList}</ul>
+  );
+}
+}
+
+console.log('')

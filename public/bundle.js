@@ -24784,8 +24784,6 @@ var _time2 = _interopRequireDefault(_time);
 
 var _todo = require('./components/todo');
 
-var _todo2 = _interopRequireDefault(_todo);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24819,7 +24817,7 @@ var App = function (_Component) {
   return App;
 }(_react.Component);
 
-_reactDom2.default.render(_react2.default.createElement(_todo2.default, null), document.getElementById('root'));
+_reactDom2.default.render(_react2.default.createElement(_todo.TodoX, null), document.getElementById('root'));
 
 },{"./components/insert":181,"./components/ravens":182,"./components/time":183,"./components/todo":184,"react":179,"react-countdown-clock":27,"react-dom":28}],181:[function(require,module,exports){
 "use strict";
@@ -25073,6 +25071,7 @@ exports.default = Time;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.TodoX = exports.Todo = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -25174,7 +25173,7 @@ var TodoItems = function (_Component2) {
 
 ;
 
-var Todo = function (_Component3) {
+var Todo = exports.Todo = function (_Component3) {
   _inherits(Todo, _Component3);
 
   function Todo(props) {
@@ -25242,9 +25241,7 @@ var Todo = function (_Component3) {
 
 ;
 
-exports.default = Todo;
-
-var TodoX = function (_Component4) {
+var TodoX = exports.TodoX = function (_Component4) {
   _inherits(TodoX, _Component4);
 
   function TodoX(props) {
@@ -25253,11 +25250,87 @@ var TodoX = function (_Component4) {
     var _this6 = _possibleConstructorReturn(this, (TodoX.__proto__ || Object.getPrototypeOf(TodoX)).call(this, props));
 
     _this6.state = { items: [] };
-
+    _this6.addItem = _this6.addItem.bind(_this6);
     return _this6;
   }
 
+  _createClass(TodoX, [{
+    key: 'addItem',
+    value: function addItem(e) {
+      var newItems = this.state.items;
+      newItems.push({
+        text: this.inputElement.value,
+        key: (0, _moment2.default)().format()
+      });
+      this.setState({
+        items: newItems
+      });
+      e.preventDefault();
+      this.inputElement.value = " ";
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this7 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'mainList' },
+        _react2.default.createElement(
+          'form',
+          { onSubmit: this.addItem },
+          _react2.default.createElement('input', { ref: function ref(a) {
+              return _this7.inputElement = a;
+            }, placeholder: 'Enter new ToDo item!' }),
+          _react2.default.createElement(
+            'button',
+            { type: 'submit' },
+            'Add Item'
+          )
+        ),
+        _react2.default.createElement(ShowList, { entries: this.state.items }),
+        _react2.default.createElement(Time, null)
+      );
+    }
+  }]);
+
   return TodoX;
 }(_react.Component);
+// viewing component
+
+
+var ShowList = function (_Component5) {
+  _inherits(ShowList, _Component5);
+
+  function ShowList(props) {
+    _classCallCheck(this, ShowList);
+
+    return _possibleConstructorReturn(this, (ShowList.__proto__ || Object.getPrototypeOf(ShowList)).call(this, props));
+  }
+
+  _createClass(ShowList, [{
+    key: 'render',
+    value: function render() {
+      var Entries = this.props.entries;
+      function singleList(item) {
+        return _react2.default.createElement(
+          'li',
+          { key: item.key },
+          item.text
+        );
+      }
+      var fullList = Entries.map(singleList);
+      return _react2.default.createElement(
+        'ul',
+        null,
+        fullList
+      );
+    }
+  }]);
+
+  return ShowList;
+}(_react.Component);
+
+console.log('');
 
 },{"moment":24,"react":179}]},{},[180]);
